@@ -1,0 +1,2 @@
+Building the xBGAS backend requires;
+cmake -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="RISCV" -DLLVM_TARGETS_TO_BUILD="RISCV"
