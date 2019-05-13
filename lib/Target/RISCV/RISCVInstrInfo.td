@@ -355,7 +355,7 @@ let hasSideEffects = 0, mayLoad = 0, mayStore = 0 in
 class Store_Mre<bits<3> funct3, string opcodestr>
     : RVInstS<funct3, OPC_ESTORE, (outs),
               (ins EPR:$rs2, GPR:$rs1, simm12:$imm12),
-              opcodestr, "$rs2, ${imm12}(${rs1})">;
+              opcodestr, "$rs2, ${imm12}, ${rs1}">;
 
 let hasSideEffects = 0, mayLoad = 0, mayStore = 0 in
 class Store_Mer<bits<3> funct3, string opcodestr>
