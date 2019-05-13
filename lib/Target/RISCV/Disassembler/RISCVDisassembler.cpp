@@ -81,6 +81,31 @@ static DecodeStatus DecodeGPRRegisterClass(MCInst &Inst, uint64_t RegNo,
   return MCDisassembler::Success;
 }
 
+static const unsigned EPRDecoderTable[] = {
+  RISCV::E0,  RISCV::E1,  RISCV::E2,  RISCV::E3,
+  RISCV::E4,  RISCV::E5,  RISCV::E6,  RISCV::E7,
+  RISCV::E8,  RISCV::E9,  RISCV::E10, RISCV::E11,
+  RISCV::E12, RISCV::E13, RISCV::E14, RISCV::E15,
+  RISCV::E16, RISCV::E17, RISCV::E18, RISCV::E19,
+  RISCV::E20, RISCV::E21, RISCV::E22, RISCV::E23,
+  RISCV::E24, RISCV::E25, RISCV::E26, RISCV::E27,
+  RISCV::E28, RISCV::E29, RISCV::E30, RISCV::E31
+};
+
+static DecodeStatus DecodeEPRRegisterClass(MCInst &Inst, uint64_t RegNo,
+                                           uint64_t Address,
+                                           const void *Decoder) {
+  if (RegNo > sizeof(EPRDecoderTable))
+    return MCDisassembler::Fail;
+
+  // We must define our own mapping from RegNo to register identifier.
+  // Accessing index RegNo in the register class will work in the case that
+  // registers were added in ascending order, but not in general.
+  unsigned Reg = EPRDecoderTable[RegNo];
+  Inst.addOperand(MCOperand::createReg(Reg));
+  return MCDisassembler::Success;
+}
+
 static const unsigned FPR32DecoderTable[] = {
   RISCV::F0_32,  RISCV::F1_32,  RISCV::F2_32,  RISCV::F3_32,
   RISCV::F4_32,  RISCV::F5_32,  RISCV::F6_32,  RISCV::F7_32,
