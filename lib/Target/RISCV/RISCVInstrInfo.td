@@ -751,6 +751,13 @@ def : MnemonicAlias<"scall", "ecall">;
 def : MnemonicAlias<"sbreak", "ebreak">;
 
 //===----------------------------------------------------------------------===//
+// xBGAS Pseudo Instructions
+//===----------------------------------------------------------------------===//
+def : InstAlias<"movebe $rd, $rs1", (EADDI   GPR:$rd, EPR:$rs1, 0)>;
+def : InstAlias<"moveeb $rd, $rs1", (EADDIE  EPR:$rd, GPR:$rs1, 0)>;
+def : InstAlias<"moveee $rd, $rs1", (EADDIX  EPR:$rd, EPR:$rs1, 0)>;
+
+//===----------------------------------------------------------------------===//
 // Pseudo-instructions and codegen patterns
 //
 // Naming convention: For 'generic' pattern classes, we use the naming
