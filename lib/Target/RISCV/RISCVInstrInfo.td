@@ -361,13 +361,13 @@ let hasSideEffects = 0, mayLoad = 0, mayStore = 0 in
 class Store_Mer<bits<3> funct3, string opcodestr>
     : RVInstS<funct3, OPC_ESTORE, (outs),
               (ins GPR:$rs2, EPR:$rs1, simm12:$imm12),
-              opcodestr, "$rs2, ${imm12}(${rs1})">;
+              opcodestr, "$rs2, ${imm12}, ${rs1}">;
 
 let hasSideEffects = 0, mayLoad = 0, mayStore = 0 in
 class Store_Mee<bits<3> funct3, string opcodestr>
     : RVInstS<funct3, OPC_EARITH, (outs),
               (ins EPR:$rs2, EPR:$rs1, simm12:$imm12),
-              opcodestr, "$rs2, ${imm12}(${rs1})">;
+              opcodestr, "$rs2, ${imm12}, ${rs1}">;
 
 //===----------------------------------------------------------------------===//
 // Instructions
