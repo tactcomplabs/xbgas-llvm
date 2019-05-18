@@ -354,20 +354,20 @@ class ALU_Sere<bits<7> funct7, bits<3> funct3, string opcodestr>
 let hasSideEffects = 0, mayLoad = 0, mayStore = 0 in
 class Store_Mre<bits<3> funct3, string opcodestr>
     : RVInstS<funct3, OPC_ESTORE, (outs),
-              (ins EPR:$rs2, GPR:$rs1, simm12:$imm12),
-              opcodestr, "$rs2, ${imm12}, ${rs1}">;
+              (ins EPR:$rd, GPR:$rs1, simm12:$imm12),
+              opcodestr, "$rd, ${rs1}, ${imm12}">;
 
 let hasSideEffects = 0, mayLoad = 0, mayStore = 0 in
 class Store_Mer<bits<3> funct3, string opcodestr>
     : RVInstS<funct3, OPC_ESTORE, (outs),
-              (ins GPR:$rs2, EPR:$rs1, simm12:$imm12),
-              opcodestr, "$rs2, ${imm12}, ${rs1}">;
+              (ins GPR:$rd, EPR:$rs1, simm12:$imm12),
+              opcodestr, "$rd, ${rs1}, ${imm12}">;
 
 let hasSideEffects = 0, mayLoad = 0, mayStore = 0 in
 class Store_Mee<bits<3> funct3, string opcodestr>
     : RVInstS<funct3, OPC_EARITH, (outs),
-              (ins EPR:$rs2, EPR:$rs1, simm12:$imm12),
-              opcodestr, "$rs2, ${imm12}, ${rs1}">;
+              (ins EPR:$rd, EPR:$rs1, simm12:$imm12),
+              opcodestr, "$rd, ${rs1}, ${imm12}">;
 
 //===----------------------------------------------------------------------===//
 // Instructions
@@ -558,7 +558,7 @@ let Predicates = [IsRV64] in {
 
   // -- Raw Integer Load/Store: xBGAS Spec Table 6
   def ERLD : ALU_Lrre<0b1010101, 0b011, "erld">;
-  def ERLE  : ALU_Lere<0b0100001, 0b100, "erlbu">;
+  def ERLE  : ALU_Lere<0b0100001, 0b100, "erle">;
   def ERSD  : ALU_Srre<0b0100010, 0b011, "ersd">;
   def ERSE  : ALU_Sere<0b0100011, 0b011, "erse">;
 } // Predicates = [IsRV64]
